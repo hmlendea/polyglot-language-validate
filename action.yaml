@@ -1,0 +1,24 @@
+name: "polyglot_language_validate"
+description: "Validates a PolyGlot language."
+inputs:
+  polyglot_dictionary_file_path:
+    description: "The PolyGlot dictionary XML file path."
+    required: true
+
+  words_file_path:
+    description: "The words JSON file path."
+    required: true
+
+  sentences_file_path:
+    description: "The sentences JSON file path."
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Validate
+      run: dotnet run --dictionary ${{inputs.polyglot_dictionary_file_path}} --words ${{inputs.words_file_path}} --sentences ${{inputs.sentences_file_path}}
