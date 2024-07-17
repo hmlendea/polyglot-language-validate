@@ -19,10 +19,11 @@ runs:
       with:
         repository: hmlendea/polyglot-language-validator
         ref: 'refs/tags/v1.0.0'
+        path: polyglot-language-validator
 
     - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 8.0.x
 
-    - run: dotnet run --dictionary ${{inputs.polyglot_dictionary_file_path}} --words ${{inputs.words_file_path}} --sentences ${{inputs.sentences_file_path}}
+    - run: dotnet run --project "polyglot-language-validator" --dictionary "${{inputs.polyglot_dictionary_file_path}}" --words "${{inputs.words_file_path}}" --sentences "${{inputs.sentences_file_path}}"
       shell: bash
